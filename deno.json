@@ -1,0 +1,22 @@
+{
+  "imports": {
+    "@hono/trpc-server": "jsr:@hono/trpc-server@^0.4.0",
+    "@trpc/server": "npm:@trpc/server@^11.4.3",
+    "@trpc/client": "npm:@trpc/client@^11.4.3",
+    "arktype": "npm:arktype@^2.1.20",
+    "hono": "jsr:@hono/hono@^4.8.9",
+    "hono/cors": "jsr:@hono/hono@^4.8.9/cors",
+    "hono/logger": "jsr:@hono/hono@^4.8.9/logger",
+    "~/": "./src/"
+  },
+  "tasks": {
+    "start": "DENO_ENV=production deno run --allow-net --allow-env src/main.ts",
+    "dev": "deno run --allow-net --allow-env --watch src/main.ts",
+    "format": "deno fmt --quiet .",
+    "validate": "deno task format && deno lint --quiet . && deno check --quiet **/*.ts **/*.tsx"
+  },
+  "compilerOptions": {
+    "jsx": "precompile",
+    "jsxImportSource": "hono/jsx"
+  }
+}
