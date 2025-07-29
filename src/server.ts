@@ -4,11 +4,11 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 
 import type { AppContext } from "~/trpc/types.ts";
-import { setupRoutes, trpcRouter } from "~/routes/mod.ts";
+import { setupRoutes, trpcRouter } from "~/routes/api/mod.ts";
 import { injectTRPCClient } from "~/trpc/middleware.ts";
 import { config } from "~/env.ts";
 
-export function createApp() {
+export function createServer() {
   const app = new Hono<AppContext>();
 
   if (config.isDevelopment) {
@@ -20,7 +20,7 @@ export function createApp() {
     cors({
       origin: config.isDevelopment ? "*" : [],
       credentials: true,
-    }),
+    })
   );
 
   app.use("*", injectTRPCClient);
@@ -29,7 +29,7 @@ export function createApp() {
     "/trpc/*",
     trpcServer({
       router: trpcRouter,
-    }),
+    })
   );
 
   setupRoutes(app);
@@ -45,7 +45,7 @@ export function createApp() {
         error: config.isDevelopment ? err.message : "Internal Server Error",
         status: 500,
       },
-      500,
+      500
     );
   });
 

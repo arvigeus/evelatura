@@ -22,8 +22,9 @@ src/
 │   ├── middleware.ts  # Hono middleware for tRPC client injection
 │   ├── types.ts       # App context and variable types
 ├── routes/            # Route definitions
-│   ├── mod.ts         # Central router exports (tRPC + HTTP)
-│   └── *.ts           # Individual route files (co-located tRPC + HTTP)
+│   └── api/           # API routes
+│       ├── mod.ts     # Central API router exports (tRPC + HTTP)
+│       └── *.ts       # Individual API route files (co-located tRPC + HTTP)
 ├── env.ts             # Environment configuration
 ├── app.ts             # Hono app setup with middleware
 └── main.ts            # Server entry point

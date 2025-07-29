@@ -20,10 +20,3 @@ export const healthCheckHandler: RouteHandler = async (c) => {
     timestamp: new Date().toISOString(),
   });
 };
-
-export const getInfoHandler: RouteHandler = (c) => {
-  return c.json({
-    name: "API Server",
-    version: "1.0.0",
-  });
-};
