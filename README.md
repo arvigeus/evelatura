@@ -10,6 +10,7 @@ safety and developer experience.
 - **Runtime**: Deno
 - **Web Framework**: Hono
 - **RPC Framework**: tRPC with Hono adapter
+- **Build Tool**: Vite
 - **Validation**: ArkType
 
 ### Project Structure
@@ -22,12 +23,11 @@ src/
 │   ├── middleware.ts  # Hono middleware for tRPC client injection
 │   ├── types.ts       # App context and variable types
 ├── routes/            # Route definitions
-│   └── api/           # API routes
-│       ├── mod.ts     # Central API router exports (tRPC + HTTP)
-│       └── *.ts       # Individual API route files (co-located tRPC + HTTP)
+│   ├── mod.ts         # Central API router exports (tRPC + HTTP)
+│   └── *.ts           # Individual API route files (co-located tRPC + HTTP)
 ├── env.ts             # Environment configuration
-├── app.ts             # Hono app setup with middleware
-└── main.ts            # Server entry point
+├── main.ts            # Application entry point
+└── server.ts          # Hono server factory with middleware setup
 ```
 
 ## Key Features
@@ -58,7 +58,7 @@ Each route file contains both tRPC procedures and HTTP handlers:
 
 Environment variables:
 
-- `PORT` - Server port (default: 8000)
+- `PORT` - Server port (default: 5174)
 - `HOST` - Server host (default: localhost)
 - `DENO_ENV` - Environment mode (default: development)
 - `BASE_URL` - Override base URL for tRPC client
@@ -70,8 +70,8 @@ Environment variables:
 deno task dev
 
 # Server will be available at:
-# HTTP: http://localhost:8000
-# tRPC: http://localhost:8000/trpc
+# HTTP: http://localhost:5174
+# tRPC: http://localhost:5174/trpc
 ```
 
 ## Adding New Routes
@@ -80,29 +80,60 @@ deno task dev
 
 ```ts
 import { type } from "arktype";
+import { arktypeValidator } from "@hono/arktype-validator";
 import { publicProcedure } from "~/trpc/server.ts";
-import type { RouteHandler } from "~/trpc/types.ts";
+import type { Hono } from "hono";
+import type { AppContext, RouteHandler } from "~/trpc/types.ts";
 
 // tRPC procedures
 export const featureProcedures = {
-  getData: publicProcedure.query(() => ({ data: "example" })),
+  getData: publicProcedure
+    .input(type({ id: "number" }))
+    .query(({ input }) => ({ id: input.id, data: "example" })),
+
+  createData: publicProcedure
+    .input(type({ name: "string>0" }))
+    .mutation(({ input }) => ({ id: 1, name: input.name })),
 };
 
-// HTTP handlers
-export const getFeature: RouteHandler = (c) => {
-  return c.json({ feature: "data" });
+// HTTP handlers - simple handler
+export const getFeatureHandler: RouteHandler = async (c) => {
+  const trpc = c.get("trpcClient");
+  const result = await trpc.getData.query({ id: 1 });
+  return c.json(result);
+};
+
+// HTTP handlers - with validation middleware (function-based)
+const schema = type({ name: "string>0" });
+
+export const createFeatureHandler = (app: Hono<AppContext>, path: string) => {
+  app.post(path, arktypeValidator("json", schema), (c) => {
+    const data = c.req.valid("json");
+    return c.json({
+      success: true,
+      message: `Created ${data.name}`,
+    });
+  });
 };
 ```
 
-1. Register in `src/routes/mod.ts`:
+2. Register in `src/routes/mod.ts`:
 
 ```ts
-import { featureProcedures, getFeature } from "./feature.ts";
+import {
+  featureProcedures,
+  getFeatureHandler,
+  createFeatureHandler,
+} from "./feature.ts";
 
-export const appRouter = router({
+// Add tRPC procedures
+export const trpcRouter = router({
   ...healthProcedures,
-  ...featureProcedures, // Add tRPC procedures
+  ...featureProcedures,
 });
 
-routes.get("/feature", getFeature); // Add HTTP route
+export function setupRoutes(app: Hono<AppContext>) {
+  app.get("/feature", getFeatureHandler);
+  createFeatureHandler(app, "/feature");
+}
 ```

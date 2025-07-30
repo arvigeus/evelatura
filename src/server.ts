@@ -4,7 +4,7 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 
 import type { AppContext } from "~/trpc/types.ts";
-import { setupRoutes, trpcRouter } from "~/routes/api/mod.ts";
+import { setupRoutes, trpcRouter } from "~/routes/mod.ts";
 import { injectTRPCClient } from "~/trpc/middleware.ts";
 import { config } from "~/env.ts";
 

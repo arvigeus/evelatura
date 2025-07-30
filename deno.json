@@ -1,22 +1,28 @@
 {
   "imports": {
+    "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.5",
+    "@hono/arktype-validator": "npm:@hono/arktype-validator@^2.0.1",
     "@hono/trpc-server": "jsr:@hono/trpc-server@^0.4.0",
+    "@hono/vite-dev-server": "npm:@hono/vite-dev-server@^0.20.0",
     "@trpc/server": "npm:@trpc/server@^11.4.3",
     "@trpc/client": "npm:@trpc/client@^11.4.3",
     "arktype": "npm:arktype@^2.1.20",
-    "hono": "jsr:@hono/hono@^4.8.9",
-    "hono/cors": "jsr:@hono/hono@^4.8.9/cors",
-    "hono/logger": "jsr:@hono/hono@^4.8.9/logger",
+    "hono": "npm:hono@^4.8.10",
+    "vite": "npm:vite@^7.0.6",
     "~/": "./src/"
   },
   "tasks": {
     "start": "DENO_ENV=production deno run --allow-net --allow-env src/main.ts",
-    "dev": "deno run --allow-net --allow-env --watch src/main.ts",
+    "dev": "vite",
     "format": "deno fmt --quiet .",
     "validate": "deno task format && deno lint --quiet . && deno check --quiet **/*.ts **/*.tsx"
   },
   "compilerOptions": {
+    "strict": true,
+    "types": ["@cloudflare/workers-types", "vite/client"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "deno.ns"],
     "jsx": "precompile",
     "jsxImportSource": "hono/jsx"
-  }
+  },
+  "nodeModulesDir": "auto"
 }

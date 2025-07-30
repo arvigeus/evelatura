@@ -2,5 +2,10 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
   "deno.enable": true,
-  "deno.lint": true
+  "deno.lint": true,
+  "files.exclude": {
+    "node_modules": true,
+    "deno.lock": true,
+    ".vite": true
+  }
 }

@@ -1,5 +1,5 @@
 export const config = {
-  port: Number(Deno.env.get("PORT")) || 8000,
+  port: Number(Deno.env.get("PORT")) || 5173,
   host: Deno.env.get("HOST") || "localhost",
   denoEnv: Deno.env.get("DENO_ENV") || "development",
   get baseUrl() {

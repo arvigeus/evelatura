@@ -1,5 +1,5 @@
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
-import type { TrpcRouter } from "~/routes/api/mod.ts";
+import type { TrpcRouter } from "~/routes/mod.ts";
 import { config } from "~/env.ts";
 
 export function createTRPCClient() {
