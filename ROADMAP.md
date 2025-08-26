@@ -19,29 +19,29 @@
 
 **Goal**: Set up the base project with all core dependencies
 
-- [ ] Initialize TanStack Start with TypeScript
+- [x] Initialize TanStack Start with TypeScript
 - [ ] Configure Cloudflare Pages deployment settings
-- [ ] Set up BiomeJS for linting/formatting
+- [x] Set up BiomeJS for linting/formatting
 - [ ] Configure TailwindCSS 4 with custom theme (Be Vietnam Pro for body, Gotu for headings)
-- [ ] Add `.editorconfig` for consistent formatting
+- [x] Add `.editorconfig` for consistent formatting
 - [ ] Set up git hooks for pre-commit quality checks
 - [ ] Create base folder structure following feature-based organization
 
 ```css
 /* Reference: TailwindCSS 4 theme configuration in CSS */
 @theme {
-  --font-sans: 'Be Vietnam Pro', system-ui, sans-serif;
-  --font-display: 'Gotu', serif;
-  
+  --font-sans: "Be Vietnam Pro", system-ui, sans-serif;
+  --font-display: "Gotu", serif;
+
   /* Warm, joyful, light earthy Vietnamese-inspired palette */
   --color-primary-50: /* light */;
   --color-primary-500: /* main */;
   --color-primary-900: /* dark */;
-  
+
   --color-secondary-50: /* light */;
   --color-secondary-500: /* main */;
   --color-secondary-900: /* dark */;
-  
+
   --color-accent-50: /* light */;
   --color-accent-500: /* main */;
   --color-accent-900: /* dark */;
@@ -87,18 +87,22 @@
 // Reference: Social provider configuration
 const authConfig = {
   providers: [
-    GoogleProvider({ /* config */ }),
-    FacebookProvider({ /* config */ }),
+    GoogleProvider({
+      /* config */
+    }),
+    FacebookProvider({
+      /* config */
+    }),
     // Zalo OAuth requires custom provider setup
     CustomProvider({
-      id: 'zalo',
-      name: 'Zalo',
-      authorizationUrl: 'https://oauth.zaloapp.com/v4/permission',
-      tokenUrl: 'https://oauth.zaloapp.com/v4/access_token',
-      profileUrl: 'https://graph.zalo.me/v2.0/me',
-    })
-  ]
-}
+      id: "zalo",
+      name: "Zalo",
+      authorizationUrl: "https://oauth.zaloapp.com/v4/permission",
+      tokenUrl: "https://oauth.zaloapp.com/v4/access_token",
+      profileUrl: "https://graph.zalo.me/v2.0/me",
+    }),
+  ],
+};
 ```
 
 ### Task 2.2: User Roles and Permissions
@@ -457,7 +461,7 @@ interface ChartProps {
 ```typescript
 // Reference: Promotion rule structure
 interface PromotionRule {
-  type: 'percentage' | 'fixed' | 'bogo' | 'bundle';
+  type: "percentage" | "fixed" | "bogo" | "bundle";
   conditions: {
     minPurchase?: number;
     validFrom?: Date;
@@ -641,7 +645,6 @@ interface BusinessInfo {
 **Goal**: Guide for shop owners on Vietnamese e-commerce
 
 - [ ] Create comprehensive documentation covering:
-
   - Business registration requirements for online selling
   - Tax obligations (VAT, CIT, PIT)
   - Required licenses for specific product categories
