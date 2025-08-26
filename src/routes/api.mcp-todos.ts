@@ -1,6 +1,6 @@
 import { createServerFileRoute } from "@tanstack/react-start/server";
 
-import { addTodo, getTodos, subscribeToTodos } from "@/mcp-todos";
+import { addTodo, getTodos, subscribeToTodos } from "~/mcp-todos";
 
 export const ServerRoute = createServerFileRoute("/api/mcp-todos").methods({
 	GET: () => {

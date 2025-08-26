@@ -1,4 +1,4 @@
-import { TanstackDevtools } from "@tanstack/react-devtools";
+import { TanStackDevtools } from "@tanstack/react-devtools";
 import {
 	HeadContent,
 	Scripts,
@@ -13,6 +13,7 @@ import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
 
 import type { QueryClient } from "@tanstack/react-query";
+import type { ReactNode } from "react";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
@@ -43,7 +44,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	shellComponent: RootDocument,
 });
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootDocument({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en">
 			<head>
@@ -51,7 +52,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			</head>
 			<body>
 				{children}
-				<TanstackDevtools
+				<TanStackDevtools
 					config={{
 						position: "bottom-left",
 					}}

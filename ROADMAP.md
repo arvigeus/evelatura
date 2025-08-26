@@ -22,6 +22,8 @@
 - [x] Initialize TanStack Start with TypeScript
 - [ ] Configure Cloudflare Pages deployment settings
 - [x] Set up BiomeJS for linting/formatting
+- [x] Set up React Aria components
+- [x] Set up Storybook
 - [ ] Configure TailwindCSS 4 with custom theme (Be Vietnam Pro for body, Gotu for headings)
 - [x] Add `.editorconfig` for consistent formatting
 - [ ] Set up git hooks for pre-commit quality checks
