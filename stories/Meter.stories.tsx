@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import { Meter } from "../src/components/ui/Meter";
 
 const meta: Meta<typeof Meter> = {

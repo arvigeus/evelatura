@@ -9,16 +9,16 @@ import {
 	type DisclosurePanelProps as AriaDisclosurePanelProps,
 	type DisclosureProps as AriaDisclosureProps,
 	Button,
+	composeRenderProps,
+	DisclosureGroupStateContext,
 	DisclosureStateContext,
 	Heading,
-	composeRenderProps,
 } from "react-aria-components";
-import { DisclosureGroupStateContext } from "react-aria-components";
 import { tv } from "tailwind-variants";
 import { composeTailwindRenderProps, focusRing } from "./utils";
 
 const disclosure = tv({
-	base: "group min-w-64 rounded-lg border border-gray-200 text-gray-900 dark:border-zinc-600 dark:text-zinc-200",
+	base: "group min-w-64 rounded-lg border border-gray-200",
 	variants: {
 		isInGroup: {
 			true: "rounded-b-none border-0 border-b last:rounded-b-lg last:border-b-0",
@@ -31,7 +31,7 @@ const disclosureButton = tv({
 	base: "flex w-full cursor-default items-center gap-2 rounded-lg p-2 text-start",
 	variants: {
 		isDisabled: {
-			true: "text-gray-300 dark:text-zinc-600 forced-colors:text-[GrayText]",
+			true: "text-gray-300 forced-colors:text-[GrayText]",
 		},
 		isInGroup: {
 			true: "-outline-offset-2 rounded-none group-first:rounded-t-lg group-last:rounded-b-lg",
@@ -40,13 +40,13 @@ const disclosureButton = tv({
 });
 
 const chevron = tv({
-	base: "h-5 w-5 text-gray-500 transition-transform duration-200 ease-in-out dark:text-gray-400",
+	base: "h-5 w-5 text-gray-500 transition-transform duration-200 ease-in-out",
 	variants: {
 		isExpanded: {
 			true: "rotate-90 transform",
 		},
 		isDisabled: {
-			true: "text-gray-300 dark:text-zinc-600 forced-colors:text-[GrayText]",
+			true: "text-gray-300 forced-colors:text-[GrayText]",
 		},
 	},
 });
@@ -126,7 +126,7 @@ export function DisclosureGroup({ children, ...props }: DisclosureGroupProps) {
 			{...props}
 			className={composeTailwindRenderProps(
 				props.className,
-				"rounded-lg border border-gray-200 dark:border-zinc-600",
+				"rounded-lg border border-gray-200",
 			)}
 		>
 			{children}

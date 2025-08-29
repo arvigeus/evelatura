@@ -24,7 +24,7 @@
 - [x] Set up BiomeJS for linting/formatting
 - [x] Set up React Aria components
 - [x] Set up Storybook
-- [ ] Configure TailwindCSS 4 with custom theme (Be Vietnam Pro for body, Gotu for headings)
+- [x] Configure TailwindCSS 4 with custom theme (Be Vietnam Pro for body, Patrick Hand for headings)
 - [x] Add `.editorconfig` for consistent formatting
 - [ ] Set up git hooks for pre-commit quality checks
 - [ ] Create base folder structure following feature-based organization
@@ -33,7 +33,7 @@
 /* Reference: TailwindCSS 4 theme configuration in CSS */
 @theme {
   --font-sans: "Be Vietnam Pro", system-ui, sans-serif;
-  --font-display: "Gotu", serif;
+  --font-display: "Patrick Hand", serif;
 
   /* Warm, joyful, light earthy Vietnamese-inspired palette */
   --color-primary-50: /* light */;

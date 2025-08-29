@@ -1,5 +1,6 @@
 "use client";
 import {
+	composeRenderProps,
 	Tab as RACTab,
 	TabList as RACTabList,
 	TabPanel as RACTabPanel,
@@ -8,48 +9,59 @@ import {
 	type TabPanelProps,
 	type TabProps,
 	type TabsProps,
-	composeRenderProps,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 import { focusRing } from "./utils";
 
 const tabsStyles = tv({
-	base: "flex gap-4",
-	variants: {
-		orientation: {
-			horizontal: "flex-col",
-			vertical: "w-[800px] flex-row",
-		},
-	},
+	base: "w-full",
 });
 
-export function Tabs(props: TabsProps) {
+export interface CustomTabsProps extends TabsProps {
+	variant?: "default" | "underline";
+}
+
+export function Tabs({ variant = "default", ...props }: CustomTabsProps) {
 	return (
 		<RACTabs
 			{...props}
-			className={composeRenderProps(props.className, (className, renderProps) =>
-				tabsStyles({ ...renderProps, className }),
+			className={composeRenderProps(props.className, (className) =>
+				tabsStyles({ className }),
 			)}
 		/>
 	);
 }
 
 const tabListStyles = tv({
-	base: "flex gap-1",
+	base: [
+		"inline-flex h-10 items-center justify-center rounded-md p-1",
+		"text-dark",
+	],
 	variants: {
-		orientation: {
-			horizontal: "flex-row",
-			vertical: "flex-col items-start",
+		variant: {
+			default: "bg-muted",
+			underline:
+				"h-auto rounded-none border-secondary/20 border-b bg-transparent p-0",
 		},
+	},
+	defaultVariants: {
+		variant: "default",
 	},
 });
 
-export function TabList<T extends object>(props: TabListProps<T>) {
+export interface CustomTabListProps<T extends object> extends TabListProps<T> {
+	variant?: "default" | "underline";
+}
+
+export function TabList<T extends object>({
+	variant = "default",
+	...props
+}: CustomTabListProps<T>) {
 	return (
 		<RACTabList
 			{...props}
-			className={composeRenderProps(props.className, (className, renderProps) =>
-				tabListStyles({ ...renderProps, className }),
+			className={composeRenderProps(props.className, (className) =>
+				tabListStyles({ variant, className }),
 			)}
 		/>
 	);
@@ -57,25 +69,42 @@ export function TabList<T extends object>(props: TabListProps<T>) {
 
 const tabProps = tv({
 	extend: focusRing,
-	base: "flex cursor-default items-center rounded-full px-4 py-1.5 font-medium text-sm transition forced-color-adjust-none",
+	base: [
+		"inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5",
+		"font-medium text-dark text-sm transition-all",
+		"disabled:pointer-events-none disabled:opacity-50",
+	],
 	variants: {
-		isSelected: {
-			false:
-				"pressed:bg-gray-200 pressed:text-gray-700 text-gray-600 hover:bg-gray-200 hover:text-gray-700 dark:pressed:bg-zinc-800 dark:pressed:text-zinc-200 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-200",
-			true: "bg-gray-800 text-white dark:bg-zinc-200 dark:text-black forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
+		variant: {
+			default: [
+				"hover:bg-surface/50",
+				"selected:bg-surface selected:text-dark selected:shadow-sm",
+			],
+			underline: [
+				"rounded-none border-transparent border-b-2 px-4 py-2",
+				"selected:border-accent selected:text-accent",
+			],
 		},
-		isDisabled: {
-			true: "selected:bg-gray-200 selected:text-gray-300 text-gray-200 dark:selected:bg-zinc-600 dark:selected:text-zinc-500 dark:text-zinc-600 forced-colors:selected:bg-[GrayText] forced-colors:selected:text-[HighlightText] forced-colors:text-[GrayText]",
-		},
+	},
+	defaultVariants: {
+		variant: "default",
 	},
 });
 
-export function Tab(props: TabProps) {
+export interface CustomTabProps extends TabProps {
+	variant?: "default" | "underline";
+}
+
+export function Tab({ variant = "default", ...props }: CustomTabProps) {
 	return (
 		<RACTab
 			{...props}
 			className={composeRenderProps(props.className, (className, renderProps) =>
-				tabProps({ ...renderProps, className }),
+				tabProps({
+					...renderProps,
+					variant,
+					className,
+				}),
 			)}
 		/>
 	);
@@ -83,15 +112,18 @@ export function Tab(props: TabProps) {
 
 const tabPanelStyles = tv({
 	extend: focusRing,
-	base: "flex-1 p-4 text-gray-900 text-sm dark:text-zinc-100",
+	base: [
+		"mt-2 focus-visible:outline-none",
+		"focus-visible:ring-2 focus-visible:ring-accent/20 focus-visible:ring-offset-2",
+	],
 });
 
 export function TabPanel(props: TabPanelProps) {
 	return (
 		<RACTabPanel
 			{...props}
-			className={composeRenderProps(props.className, (className, renderProps) =>
-				tabPanelStyles({ ...renderProps, className }),
+			className={composeRenderProps(props.className, (className) =>
+				tabPanelStyles({ className }),
 			)}
 		/>
 	);

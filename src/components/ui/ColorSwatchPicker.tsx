@@ -35,7 +35,7 @@ export function ColorSwatchPickerItem(props: ColorSwatchPickerItemProps) {
 				<>
 					<ColorSwatch />
 					{isSelected && (
-						<div className="-outline-offset-4 absolute top-0 left-0 h-full w-full rounded-xs border border-2 border-black outline outline-2 outline-white forced-color-adjust-none dark:border-white dark:outline-black" />
+						<div className="-outline-offset-4 absolute top-0 left-0 h-full w-full rounded-xs border-2 border-black outline-2 outline-white forced-color-adjust-none" />
 					)}
 				</>
 			)}

@@ -22,12 +22,12 @@ import { composeTailwindRenderProps, focusRing } from "./utils";
 
 const styles = tv({
 	extend: focusRing,
-	base: "flex w-full min-w-[150px] cursor-default items-center gap-4 rounded-lg border border-black/10 bg-gray-50 py-2 pr-2 pl-3 text-start shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] transition dark:border-white/10 dark:bg-zinc-700 dark:shadow-none",
+	base: "flex w-full min-w-[150px] cursor-default items-center gap-4 rounded-lg border border-black/10 bg-gray-50 py-2 pr-2 pl-3 text-start shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] transition",
 	variants: {
 		isDisabled: {
 			false:
-				"pressed:bg-gray-200 text-gray-800 hover:bg-gray-100 group-invalid:border-red-600 dark:pressed:bg-zinc-500 dark:text-zinc-300 dark:hover:bg-zinc-600 forced-colors:group-invalid:border-[Mark]",
-			true: "text-gray-200 dark:border-white/5 dark:bg-zinc-800 dark:text-zinc-600 forced-colors:border-[GrayText] forced-colors:text-[GrayText]",
+				"pressed:bg-gray-200 text-gray-800 hover:bg-gray-100 group-invalid:border-red-600 forced-colors:group-invalid:border-[Mark]",
+			true: "text-gray-200 forced-colors:border-[GrayText] forced-colors:text-[GrayText]",
 		},
 	},
 });
@@ -62,7 +62,7 @@ export function Select<T extends object>({
 				<SelectValue className="flex-1 text-sm placeholder-shown:italic" />
 				<ChevronDown
 					aria-hidden
-					className="h-4 w-4 text-gray-600 group-disabled:text-gray-200 dark:text-zinc-400 dark:group-disabled:text-zinc-600 forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
+					className="h-4 w-4 text-gray-600 group-disabled:text-gray-200 forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
 				/>
 			</Button>
 			{description && <Description>{description}</Description>}

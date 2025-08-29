@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import { ToggleButton } from "../src/components/ui/ToggleButton";
 import { ToggleButtonGroup } from "../src/components/ui/ToggleButtonGroup";
 import { Bold, Italic, Underline } from "lucide-react";
@@ -16,13 +16,13 @@ export default meta;
 export const Example = (args: any) => (
 	<ToggleButtonGroup {...args}>
 		<ToggleButton id="bold" aria-label="Bold">
-			<Bold className="w-4 h-4" />
+			<Bold className="h-4 w-4" />
 		</ToggleButton>
 		<ToggleButton id="italic" aria-label="Italic">
-			<Italic className="w-4 h-4" />
+			<Italic className="h-4 w-4" />
 		</ToggleButton>
 		<ToggleButton id="underline" aria-label="Underline">
-			<Underline className="w-4 h-4" />
+			<Underline className="h-4 w-4" />
 		</ToggleButton>
 	</ToggleButtonGroup>
 );

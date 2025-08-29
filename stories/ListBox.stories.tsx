@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import { ListBox, ListBoxItem } from "../src/components/ui/ListBox";
 
 const meta: Meta<typeof ListBox> = {

@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import { GridList, GridListItem } from "../src/components/ui/GridList";
 
 const meta: Meta<typeof GridList> = {

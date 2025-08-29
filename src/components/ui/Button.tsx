@@ -1,34 +1,66 @@
 "use client";
 import {
+	composeRenderProps,
 	Button as RACButton,
 	type ButtonProps as RACButtonProps,
-	composeRenderProps,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 import { focusRing } from "./utils";
 
 export interface ButtonProps extends RACButtonProps {
 	/** @default 'primary' */
-	variant?: "primary" | "secondary" | "destructive" | "icon";
+	variant?:
+		| "primary"
+		| "secondary"
+		| "accent"
+		| "outline"
+		| "destructive"
+		| "ghost"
+		| "icon";
+	/** @default 'md' */
+	size?: "xs" | "sm" | "md" | "lg" | "xl";
 }
 
 const button = tv({
 	extend: focusRing,
-	base: "cursor-default rounded-lg border border-black/10 px-5 py-2 text-center text-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] transition dark:border-white/10 dark:shadow-none",
+	base: "cursor-default border text-center font-medium shadow-sm transition-all duration-200",
 	variants: {
 		variant: {
-			primary: "bg-blue-600 pressed:bg-blue-800 text-white hover:bg-blue-700",
+			primary:
+				"border-primary bg-primary pressed:bg-primary-hover text-white shadow-md hover:bg-primary-hover",
 			secondary:
-				"bg-gray-100 pressed:bg-gray-300 text-gray-800 hover:bg-gray-200 dark:bg-zinc-600 dark:pressed:bg-zinc-400 dark:text-zinc-100 dark:hover:bg-zinc-500",
-			destructive: "bg-red-700 pressed:bg-red-900 text-white hover:bg-red-800",
-			icon: "flex items-center justify-center border-0 pressed:bg-black/10 p-1 text-gray-600 hover:bg-black/[5%] disabled:bg-transparent dark:pressed:bg-white/20 dark:text-zinc-400 dark:hover:bg-white/10",
+				"border-secondary bg-secondary pressed:bg-secondary-hover text-dark hover:bg-secondary-hover",
+			accent:
+				"border-accent bg-accent pressed:bg-accent-hover text-white hover:bg-accent-hover",
+			outline:
+				"border-primary bg-transparent pressed:bg-primary text-primary hover:bg-primary hover:text-white",
+			destructive:
+				"border-error bg-error pressed:bg-error/90 text-white hover:bg-error/90",
+			ghost:
+				"border-transparent bg-transparent pressed:bg-muted text-dark hover:bg-muted",
+			icon: "flex items-center justify-center border-transparent pressed:bg-muted text-dark hover:bg-muted disabled:bg-transparent",
+		},
+		size: {
+			xs: "rounded-xl px-2 py-1 text-xs",
+			sm: "rounded-xl px-3 py-1.5 text-sm",
+			md: "rounded-2xl px-5 py-2.5 text-sm",
+			lg: "rounded-2xl px-6 py-3 text-base",
+			xl: "rounded-3xl px-8 py-4 text-lg",
 		},
 		isDisabled: {
-			true: "border-black/5 bg-gray-100 text-gray-300 dark:border-white/5 dark:bg-zinc-800 dark:text-zinc-600 forced-colors:text-[GrayText]",
+			true: "cursor-not-allowed opacity-50",
 		},
 	},
+	compoundVariants: [
+		{ variant: "icon", size: "xs", className: "rounded-xl p-1" },
+		{ variant: "icon", size: "sm", className: "rounded-xl p-1.5" },
+		{ variant: "icon", size: "md", className: "rounded-2xl p-2" },
+		{ variant: "icon", size: "lg", className: "rounded-2xl p-2.5" },
+		{ variant: "icon", size: "xl", className: "rounded-3xl p-3" },
+	],
 	defaultVariants: {
 		variant: "primary",
+		size: "md",
 	},
 });
 
@@ -37,7 +69,12 @@ export function Button(props: ButtonProps) {
 		<RACButton
 			{...props}
 			className={composeRenderProps(props.className, (className, renderProps) =>
-				button({ ...renderProps, variant: props.variant, className }),
+				button({
+					...renderProps,
+					variant: props.variant,
+					size: props.size,
+					className,
+				}),
 			)}
 		/>
 	);

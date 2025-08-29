@@ -8,15 +8,15 @@ import { tv } from "tailwind-variants";
 import {
 	Description,
 	FieldError,
+	fieldBorderStyles,
 	Input,
 	Label,
-	fieldBorderStyles,
 } from "./Field";
 import { composeTailwindRenderProps, focusRing } from "./utils";
 
 const inputStyles = tv({
 	extend: focusRing,
-	base: "rounded-md border-2",
+	base: "rounded-xl border-2 bg-surface",
 	variants: {
 		isFocused: fieldBorderStyles.variants.isFocusWithin,
 		isInvalid: fieldBorderStyles.variants.isInvalid,

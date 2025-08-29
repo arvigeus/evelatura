@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import {
 	Popover as AriaPopover,
 	type PopoverProps as AriaPopoverProps,
+	composeRenderProps,
 	OverlayArrow,
 	PopoverContext,
-	composeRenderProps,
 	useSlottedContext,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
@@ -16,7 +16,7 @@ export interface PopoverProps extends Omit<AriaPopoverProps, "children"> {
 }
 
 const styles = tv({
-	base: "rounded-xl border border-black/10 bg-white bg-clip-padding text-slate-700 shadow-2xl dark:border-white/[15%] dark:bg-zinc-900/70 dark:text-zinc-300 dark:backdrop-blur-2xl dark:backdrop-saturate-200 forced-colors:bg-[Canvas]",
+	base: "rounded-xl border border-black/10 bg-white bg-clip-padding text-slate-700 shadow-2xl forced-colors:bg-[Canvas]",
 	variants: {
 		isEntering: {
 			true: "fade-in placement-bottom:slide-in-from-top-1 placement-top:slide-in-from-bottom-1 placement-left:slide-in-from-right-1 placement-right:slide-in-from-left-1 animate-in duration-200 ease-out",
@@ -51,7 +51,7 @@ export function Popover({
 						width={12}
 						height={12}
 						viewBox="0 0 12 12"
-						className="group-placement-left:-rotate-90 block fill-white stroke-1 stroke-black/10 group-placement-bottom:rotate-180 group-placement-right:rotate-90 dark:fill-[#1f1f21] dark:stroke-zinc-600 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
+						className="group-placement-left:-rotate-90 block fill-white stroke-1 stroke-black/10 group-placement-bottom:rotate-180 group-placement-right:rotate-90 forced-colors:fill-[Canvas] forced-colors:stroke-[ButtonBorder]"
 					>
 						<title>Popover arrow</title>
 						<path d="M0 0 L6 6 L12 0" />

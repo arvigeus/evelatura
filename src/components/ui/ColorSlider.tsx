@@ -18,7 +18,7 @@ const trackStyles = tv({
 			vertical: "-translate-x-[50%] ml-[50%] h-56 w-6",
 		},
 		isDisabled: {
-			true: "bg-gray-300 dark:bg-zinc-800 forced-colors:bg-[GrayText]",
+			true: "bg-gray-300 forced-colors:bg-[GrayText]",
 		},
 	},
 });
@@ -37,7 +37,7 @@ export function ColorSlider({ label, ...props }: ColorSliderProps) {
 			)}
 		>
 			<Label>{label}</Label>
-			<SliderOutput className="orientation-vertical:hidden font-medium text-gray-500 text-sm dark:text-zinc-400" />
+			<SliderOutput className="orientation-vertical:hidden font-medium text-gray-500 text-sm" />
 			<SliderTrack
 				className={trackStyles}
 				style={({ defaultStyle, isDisabled }) => ({

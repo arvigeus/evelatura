@@ -18,21 +18,21 @@ const trackStyles = tv({
 			vertical: "-translate-x-[50%] ml-[50%] h-full w-[6px]",
 		},
 		isDisabled: {
-			false: "bg-gray-300 dark:bg-zinc-500 forced-colors:bg-[ButtonBorder]",
-			true: "bg-gray-100 dark:bg-zinc-800 forced-colors:bg-[GrayText]",
+			false: "bg-accent/30 forced-colors:bg-[ButtonBorder]",
+			true: "bg-neutral/20 forced-colors:bg-[GrayText]",
 		},
 	},
 });
 
 const thumbStyles = tv({
 	extend: focusRing,
-	base: "h-6 w-6 rounded-full border-2 border-gray-700 bg-gray-50 group-orientation-horizontal:mt-6 group-orientation-vertical:ml-3 dark:border-gray-300 dark:bg-zinc-900",
+	base: "h-6 w-6 rounded-full border-2 border-accent bg-surface group-orientation-horizontal:mt-6 group-orientation-vertical:ml-3",
 	variants: {
 		isDragging: {
-			true: "bg-gray-700 dark:bg-gray-300 forced-colors:bg-[ButtonBorder]",
+			true: "border-accent-hover bg-accent forced-colors:bg-[ButtonBorder]",
 		},
 		isDisabled: {
-			true: "border-gray-300 dark:border-zinc-700 forced-colors:border-[GrayText]",
+			true: "border-neutral/30 forced-colors:border-[GrayText]",
 		},
 	},
 });
@@ -56,7 +56,7 @@ export function Slider<T extends number | number[]>({
 			)}
 		>
 			<Label>{label}</Label>
-			<SliderOutput className="orientation-vertical:hidden font-medium text-gray-500 text-sm dark:text-zinc-400">
+			<SliderOutput className="orientation-vertical:hidden font-medium text-neutral text-sm">
 				{({ state }) =>
 					state.values.map((_, i) => state.getThumbValueLabel(i)).join(" – ")
 				}

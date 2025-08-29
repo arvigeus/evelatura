@@ -22,12 +22,11 @@ const cellStyles = tv({
 	base: "m-px flex h-9 w-9 cursor-default items-center justify-center rounded-full text-sm forced-color-adjust-none",
 	variants: {
 		isSelected: {
-			false:
-				"pressed:bg-gray-200 text-zinc-900 hover:bg-gray-100 dark:pressed:bg-zinc-600 dark:text-zinc-200 dark:hover:bg-zinc-700",
-			true: "bg-blue-600 text-white invalid:bg-red-600 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]",
+			false: "pressed:bg-gray-200 text-zinc-900 hover:bg-gray-100",
+			true: "bg-accent text-white invalid:bg-red-600 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]",
 		},
 		isDisabled: {
-			true: "text-gray-300 dark:text-zinc-600 forced-colors:text-[GrayText]",
+			true: "text-gray-300 forced-colors:text-[GrayText]",
 		},
 	},
 });
@@ -71,7 +70,7 @@ export function CalendarHeader() {
 					<ChevronLeft aria-hidden />
 				)}
 			</Button>
-			<Heading className="mx-2 flex-1 text-center font-semibold text-xl text-zinc-900 dark:text-zinc-200" />
+			<Heading className="mx-2 flex-1 text-center font-semibold text-xl text-zinc-900" />
 			<Button variant="icon" slot="next">
 				{direction === "rtl" ? (
 					<ChevronLeft aria-hidden />

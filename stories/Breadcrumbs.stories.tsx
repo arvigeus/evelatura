@@ -1,6 +1,6 @@
 import { Breadcrumb, Breadcrumbs } from "../src/components/ui/Breadcrumbs";
 
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 
 const meta: Meta<typeof Breadcrumbs> = {
 	component: Breadcrumbs,

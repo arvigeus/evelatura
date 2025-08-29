@@ -11,22 +11,21 @@ import {
 	Collection,
 	type ColumnProps,
 	ColumnResizer,
+	composeRenderProps,
 	Group,
 	ResizableTableContainer,
 	type RowProps,
 	type TableHeaderProps,
 	type TableProps,
-	composeRenderProps,
 	useTableOptions,
 } from "react-aria-components";
-import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
 import { Checkbox } from "./Checkbox";
 import { composeTailwindRenderProps, focusRing } from "./utils";
 
 export function Table(props: TableProps) {
 	return (
-		<ResizableTableContainer className="relative max-h-[280px] w-[550px] scroll-pt-[2.281rem] overflow-auto rounded-lg border border-gray-200 dark:border-zinc-600">
+		<ResizableTableContainer className="relative max-h-[280px] w-[550px] scroll-pt-[2.281rem] overflow-auto rounded-lg border border-gray-200">
 			<AriaTable {...props} className="border-separate border-spacing-0" />
 		</ResizableTableContainer>
 	);
@@ -39,7 +38,7 @@ const columnStyles = tv({
 
 const resizerStyles = tv({
 	extend: focusRing,
-	base: "-outline-offset-2 box-content h-5 resizing:w-[2px] w-px translate-x-[8px] cursor-col-resize rounded-xs bg-gray-400 resizing:bg-blue-600 bg-clip-content px-[8px] py-1 resizing:pl-[7px] dark:bg-zinc-500 forced-colors:bg-[ButtonBorder] forced-colors:resizing:bg-[Highlight]",
+	base: "-outline-offset-2 box-content h-5 resizing:w-[2px] w-px translate-x-[8px] cursor-col-resize rounded-xs bg-gray-400 resizing:bg-accent bg-clip-content px-[8px] py-1 resizing:pl-[7px] forced-colors:bg-[ButtonBorder] forced-colors:resizing:bg-[Highlight]",
 });
 
 export function Column(props: ColumnProps) {
@@ -48,7 +47,7 @@ export function Column(props: ColumnProps) {
 			{...props}
 			className={composeTailwindRenderProps(
 				props.className,
-				"cursor-default text-start font-semibold text-gray-700 text-sm focus-within:z-20 dark:text-zinc-300 [&:hover]:z-20",
+				"cursor-default text-start font-semibold text-gray-700 text-sm focus-within:z-20 [&:hover]:z-20",
 			)}
 		>
 			{composeRenderProps(
@@ -66,7 +65,7 @@ export function Column(props: ColumnProps) {
 									{sortDirection && (
 										<ArrowUp
 											aria-hidden
-											className="h-4 w-4 text-gray-500 dark:text-zinc-400 forced-colors:text-[ButtonText]"
+											className="h-4 w-4 text-gray-500 forced-colors:text-[ButtonText]"
 										/>
 									)}
 								</span>
@@ -89,7 +88,7 @@ export function TableHeader<T extends object>(props: TableHeaderProps<T>) {
 			{...props}
 			className={composeTailwindRenderProps(
 				props.className,
-				"sticky top-0 z-10 rounded-t-lg border-b border-b-gray-200 bg-gray-100/60 backdrop-blur-md supports-[-moz-appearance:none]:bg-gray-100 dark:border-b-zinc-700 dark:bg-zinc-700/60 dark:supports-[-moz-appearance:none]:bg-zinc-700 forced-colors:bg-[Canvas]",
+				"sticky top-0 z-10 rounded-t-lg border-b border-b-gray-200 bg-gray-100/60 backdrop-blur-md supports-[-moz-appearance:none]:bg-gray-100 forced-colors:bg-[Canvas]",
 			)}
 		>
 			{/* Add extra columns for drag and drop and selection. */}
@@ -110,7 +109,7 @@ export function TableHeader<T extends object>(props: TableHeaderProps<T>) {
 
 const rowStyles = tv({
 	extend: focusRing,
-	base: "group/row -outline-offset-2 relative cursor-default select-none selected:bg-blue-100 text-gray-900 text-sm hover:bg-gray-100 selected:hover:bg-blue-200 disabled:text-gray-300 dark:selected:bg-blue-700/30 dark:text-zinc-200 dark:disabled:text-zinc-600 dark:hover:bg-zinc-700/60 dark:selected:hover:bg-blue-700/40",
+	base: "group/row -outline-offset-2 relative cursor-default select-none selected:bg-blue-100 text-sm hover:bg-gray-100 selected:hover:bg-blue-200 disabled:text-gray-300",
 });
 
 export function Row<T extends object>({
@@ -140,7 +139,7 @@ export function Row<T extends object>({
 
 const cellStyles = tv({
 	extend: focusRing,
-	base: "-outline-offset-2 truncate in-[:has(+[data-selected])]:border-(--selected-border) border-b border-b-gray-200 p-2 [--selected-border:var(--color-blue-200)] group-last/row:border-b-0 group-selected/row:border-(--selected-border) dark:border-b-zinc-700 dark:[--selected-border:var(--color-blue-900)]",
+	base: "-outline-offset-2 truncate in-[:has(+[data-selected])]:border-(--selected-border) border-b border-b-gray-200 p-2 [--selected-border:var(--color-blue-200)] group-last/row:border-b-0 group-selected/row:border-(--selected-border)",
 });
 
 export function Cell(props: CellProps) {

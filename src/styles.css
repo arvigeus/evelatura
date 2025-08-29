@@ -1,19 +1,105 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @plugin 'tailwindcss-react-aria-components';
 @plugin 'tailwindcss-animate';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-body {
-	@apply m-0;
-	font-family:
-		-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-		"Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+@theme {
+	/* Colors */
+	--color-primary: #2d2a26;
+	--color-primary-hover: #1f1d1a;
+	--color-secondary: #e8e6e3;
+	--color-secondary-hover: #dbd9d5;
+	--color-accent: #c4a484;
+	--color-accent-hover: #b8956f;
+	--color-success: #10b981;
+	--color-warning: #f59e0b;
+	--color-error: #d03939;
+	--color-neutral: #6b7280;
+	--color-background: #f9f6f1; /* Sage */
+	--color-background-shadow: #d8d4cb; /* Dark Sage */
+	--color-surface: #fcfbf8;
+	--color-muted: #f0f2ef;
+	--color-dark: #1a1614;
+
+	/* Font families */
+	--font-sans:
+		"Be Vietnam Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, sans-serif;
+	--font-serif: "Patrick Hand", Georgia, "Times New Roman", serif;
+	--font-mono:
+		source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+
+	/* Border radius */
+	--radius: 0.5rem;
 }
 
-code {
-	font-family:
-		source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+@layer base {
+	html {
+		color-scheme: light;
+		scroll-behavior: smooth;
+		background-color: var(--color-background);
+	}
+
+	body {
+		@apply m-0;
+		font-family: var(--font-sans);
+		line-height: 1.7;
+		letter-spacing: 0.01em;
+		background-color: var(--color-background);
+		color: var(--color-neutral);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* Typography refinements */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-serif);
+		color: var(--color-dark);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	p {
+		color: var(--color-neutral);
+	}
+
+	code {
+		font-family: var(--font-mono);
+	}
+
+	/* Custom scrollbar */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: var(--color-muted);
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: var(--color-secondary);
+		border-radius: 4px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--color-accent);
+	}
+}
+
+@media (min-resolution: 200dpi) {
+	html {
+		font-size: 18px;
+	}
+
+	.text-sm {
+		/* ensure minimum font size of 16px */
+		font-size: 0.9rem;
+	}
 }

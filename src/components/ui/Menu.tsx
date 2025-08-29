@@ -7,11 +7,11 @@ import {
 	MenuSection as AriaMenuSection,
 	type MenuSectionProps as AriaMenuSectionProps,
 	Collection,
+	composeRenderProps,
 	Header,
 	type MenuItemProps,
 	Separator,
 	type SeparatorProps,
-	composeRenderProps,
 } from "react-aria-components";
 import { dropdownItemStyles } from "./ListBox";
 import { Popover, type PopoverProps } from "./Popover";
@@ -65,10 +65,7 @@ export function MenuItem(props: MenuItemProps) {
 
 export function MenuSeparator(props: SeparatorProps) {
 	return (
-		<Separator
-			{...props}
-			className="mx-3 my-1 border-gray-300 border-b dark:border-zinc-700"
-		/>
+		<Separator {...props} className="mx-3 my-1 border-neutral/30 border-b" />
 	);
 }
 
@@ -84,7 +81,7 @@ export function MenuSection<T extends object>(props: MenuSectionProps<T>) {
 			className="first:-mt-[5px] after:block after:h-[5px] after:content-['']"
 		>
 			{props.title && (
-				<Header className="-top-[5px] -mt-px -mx-1 sticky z-10 truncate border-y border-y-gray-200 bg-gray-100/60 px-4 py-1 font-semibold text-gray-500 text-sm backdrop-blur-md supports-[-moz-appearance:none]:bg-gray-100 dark:border-y-zinc-700 dark:bg-zinc-700/60 dark:text-zinc-300 [&+*]:mt-1">
+				<Header className="-top-[5px] -mt-px -mx-1 sticky z-10 truncate border-y border-y-neutral/20 bg-muted/60 px-4 py-1 font-semibold text-neutral text-sm backdrop-blur-md supports-[-moz-appearance:none]:bg-muted [&+*]:mt-1">
 					{props.title}
 				</Header>
 			)}

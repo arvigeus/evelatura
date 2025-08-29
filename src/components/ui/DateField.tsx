@@ -9,7 +9,7 @@ import {
 	type ValidationResult,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
-import { Description, FieldError, Label, fieldGroupStyles } from "./Field";
+import { Description, FieldError, fieldGroupStyles, Label } from "./Field";
 import { composeTailwindRenderProps } from "./utils";
 
 export interface DateFieldProps<T extends DateValue>
@@ -42,16 +42,16 @@ export function DateField<T extends DateValue>({
 }
 
 const segmentStyles = tv({
-	base: "inline rounded-xs p-0.5 type-literal:px-0 text-gray-800 caret-transparent outline outline-0 forced-color-adjust-none dark:text-zinc-200 forced-colors:text-[ButtonText]",
+	base: "inline rounded-xs p-0.5 type-literal:px-0 text-gray-800 caret-transparent outline outline-0 forced-color-adjust-none forced-colors:text-[ButtonText]",
 	variants: {
 		isPlaceholder: {
-			true: "text-gray-600 italic dark:text-zinc-400",
+			true: "text-gray-600 italic",
 		},
 		isDisabled: {
-			true: "text-gray-200 dark:text-zinc-600 forced-colors:text-[GrayText]",
+			true: "text-gray-200 forced-colors:text-[GrayText]",
 		},
 		isFocused: {
-			true: "bg-blue-600 text-white dark:text-white forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
+			true: "bg-accent text-white forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
 		},
 	},
 });

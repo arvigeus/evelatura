@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import { ColorSlider } from "../src/components/ui/ColorSlider";
 
 const meta: Meta<typeof ColorSlider> = {

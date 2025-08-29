@@ -1,4 +1,4 @@
-const excludedProps = new Set([
+const _excludedProps = new Set([
 	"id",
 	"slot",
 	"onCopy",

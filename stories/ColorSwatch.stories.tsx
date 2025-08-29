@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import { ColorSwatch } from "../src/components/ui/ColorSwatch";
 
 const meta: Meta<typeof ColorSwatch> = {

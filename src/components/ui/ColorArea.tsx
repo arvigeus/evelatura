@@ -14,7 +14,7 @@ export function ColorArea(props: ColorAreaProps) {
 			{...props}
 			className={composeTailwindRenderProps(
 				props.className,
-				"h-56 w-56 rounded-lg bg-gray-300 dark:bg-zinc-800 forced-colors:bg-[GrayText]",
+				"h-56 w-56 rounded-lg bg-gray-300 forced-colors:bg-[GrayText]",
 			)}
 			style={({ defaultStyle, isDisabled }) => ({
 				...defaultStyle,

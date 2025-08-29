@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import { Button } from "../src/components/ui/Button";
 import { DateField } from "../src/components/ui/DateField";
 import { Form } from "../src/components/ui/Form";

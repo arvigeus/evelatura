@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import { ColorField } from "../src/components/ui/ColorField";
 
 const meta: Meta<typeof ColorField> = {

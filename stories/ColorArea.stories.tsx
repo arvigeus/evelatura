@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import { ColorArea } from "../src/components/ui/ColorArea";
 
 const meta: Meta<typeof ColorArea> = {

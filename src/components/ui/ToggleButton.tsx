@@ -1,33 +1,76 @@
 "use client";
 import {
-	ToggleButton as RACToggleButton,
-	type ToggleButtonProps,
 	composeRenderProps,
+	ToggleButton as RACToggleButton,
+	type ToggleButtonProps as RACToggleButtonProps,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 import { focusRing } from "./utils";
 
+export interface ToggleButtonProps extends RACToggleButtonProps {
+	/** @default 'accent' */
+	variant?: "accent" | "primary" | "destructive";
+	/** @default 'md' */
+	size?: "xs" | "sm" | "md" | "lg" | "xl";
+}
+
 const styles = tv({
 	extend: focusRing,
-	base: "cursor-default rounded-lg border border-black/10 px-5 py-2 text-center text-sm shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] transition forced-color-adjust-none dark:border-white/10 dark:shadow-none forced-colors:border-[ButtonBorder] [&:has(svg:only-child)]:px-2",
+	base: "cursor-default border text-center font-medium shadow-sm transition forced-color-adjust-none [&:has(svg:only-child)]:px-2",
 	variants: {
+		variant: {
+			accent: "",
+			primary: "",
+			destructive: "",
+		},
+		size: {
+			xs: "rounded-lg px-2 py-1 text-xs",
+			sm: "rounded-lg px-3 py-1.5 text-sm",
+			md: "rounded-xl px-5 py-2 text-sm",
+			lg: "rounded-xl px-6 py-3 text-base",
+			xl: "rounded-2xl px-8 py-4 text-lg",
+		},
 		isSelected: {
-			false:
-				"bg-gray-100 pressed:bg-gray-300 text-gray-800 hover:bg-gray-200 dark:bg-zinc-600 dark:pressed:bg-zinc-400 dark:text-zinc-100 dark:hover:bg-zinc-500 forced-colors:bg-[ButtonFace]! forced-colors:text-[ButtonText]!",
-			true: "bg-gray-700 pressed:bg-gray-900 text-white hover:bg-gray-800 dark:bg-slate-300 dark:pressed:bg-slate-100 dark:text-black dark:hover:bg-slate-200 forced-colors:bg-[Highlight]! forced-colors:text-[HighlightText]!",
+			false: "border-neutral/30 bg-muted text-dark hover:bg-muted/80",
+			true: "",
 		},
 		isDisabled: {
-			true: "border-black/5 bg-gray-100 text-gray-300 dark:border-white/5 dark:bg-zinc-800 dark:text-zinc-600 forced-colors:border-[GrayText] forced-colors:bg-[ButtonFace]! forced-colors:text-[GrayText]!",
+			true: "cursor-not-allowed opacity-50 forced-colors:text-[GrayText]!",
 		},
+	},
+	compoundVariants: [
+		{
+			variant: "accent",
+			isSelected: true,
+			className: "border-accent bg-accent text-white hover:bg-accent-hover",
+		},
+		{
+			variant: "primary",
+			isSelected: true,
+			className: "border-primary bg-primary text-white hover:bg-primary-hover",
+		},
+		{
+			variant: "destructive",
+			isSelected: true,
+			className: "border-error bg-error text-white hover:opacity-90",
+		},
+	],
+	defaultVariants: {
+		variant: "accent",
+		size: "md",
 	},
 });
 
-export function ToggleButton(props: ToggleButtonProps) {
+export function ToggleButton({
+	variant = "accent",
+	size = "md",
+	...props
+}: ToggleButtonProps) {
 	return (
 		<RACToggleButton
 			{...props}
 			className={composeRenderProps(props.className, (className, renderProps) =>
-				styles({ ...renderProps, className }),
+				styles({ ...renderProps, variant, size, className }),
 			)}
 		/>
 	);

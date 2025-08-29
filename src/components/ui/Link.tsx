@@ -8,18 +8,19 @@ import { tv } from "tailwind-variants";
 import { focusRing } from "./utils";
 
 interface LinkProps extends AriaLinkProps {
-	variant?: "primary" | "secondary";
+	variant?: "primary" | "secondary" | "unstyled";
 }
 
 const styles = tv({
 	extend: focusRing,
-	base: "rounded-xs underline transition disabled:cursor-default disabled:no-underline forced-colors:disabled:text-[GrayText]",
+	base: "transition disabled:cursor-default forced-colors:disabled:text-[GrayText]",
 	variants: {
 		variant: {
 			primary:
-				"text-blue-600 underline decoration-blue-600/60 hover:decoration-blue-600 dark:text-blue-500 dark:decoration-blue-500/60 dark:hover:decoration-blue-500",
+				"rounded-xs text-accent underline decoration-accent/60 hover:decoration-accent",
 			secondary:
-				"text-gray-700 underline decoration-gray-700/50 hover:decoration-gray-700 dark:text-zinc-300 dark:decoration-zinc-300/70 dark:hover:decoration-zinc-300",
+				"rounded-xs text-dark underline decoration-dark/50 hover:decoration-dark",
+			unstyled: "no-underline",
 		},
 	},
 	defaultVariants: {

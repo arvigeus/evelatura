@@ -9,26 +9,66 @@ import { composeTailwindRenderProps, focusRing } from "./utils";
 
 export interface SwitchProps extends Omit<AriaSwitchProps, "children"> {
 	children: ReactNode;
+	/** @default 'accent' */
+	variant?: "accent" | "primary" | "destructive";
+	/** @default 'md' */
+	size?: "sm" | "md" | "lg";
 }
 
 const track = tv({
 	extend: focusRing,
-	base: "flex h-4 w-7 shrink-0 cursor-default items-center rounded-full border border-transparent px-px shadow-inner transition duration-200 ease-in-out",
+	base: "flex shrink-0 cursor-default items-center rounded-full border border-transparent px-px shadow-inner transition duration-200 ease-in-out",
 	variants: {
+		variant: {
+			accent: "",
+			primary: "",
+			destructive: "",
+		},
+		size: {
+			sm: "h-4 w-7",
+			md: "h-5 w-9",
+			lg: "h-6 w-11",
+		},
 		isSelected: {
-			false:
-				"bg-gray-400 group-pressed:bg-gray-500 dark:bg-zinc-400 dark:group-pressed:bg-zinc-300",
-			true: "bg-gray-700 group-pressed:bg-gray-800 dark:bg-zinc-300 dark:group-pressed:bg-zinc-200 forced-colors:bg-[Highlight]!",
+			false: "bg-neutral/40 group-pressed:bg-neutral/50",
+			true: "",
 		},
 		isDisabled: {
-			true: "bg-gray-200 dark:bg-zinc-700 forced-colors:border-[GrayText] forced-colors:group-selected:bg-[GrayText]!",
+			true: "bg-neutral/20 forced-colors:border-[GrayText] forced-colors:group-selected:bg-[GrayText]!",
 		},
+	},
+	compoundVariants: [
+		{
+			variant: "accent",
+			isSelected: true,
+			className: "bg-accent group-pressed:opacity-90",
+		},
+		{
+			variant: "primary",
+			isSelected: true,
+			className: "bg-primary group-pressed:opacity-90",
+		},
+		{
+			variant: "destructive",
+			isSelected: true,
+			className: "bg-error group-pressed:opacity-90",
+		},
+	],
+	defaultVariants: {
+		variant: "accent",
+		size: "md",
+		isSelected: false,
 	},
 });
 
 const handle = tv({
-	base: "-outline-offset-1 h-3 w-3 transform rounded-full bg-white shadow-xs outline outline-1 outline-transparent transition duration-200 ease-in-out dark:bg-zinc-900",
+	base: "-outline-offset-1 transform rounded-full bg-white shadow-sm outline outline-1 outline-transparent transition duration-200 ease-in-out",
 	variants: {
+		size: {
+			sm: "h-3 w-3",
+			md: "h-4 w-4",
+			lg: "h-5 w-5",
+		},
 		isSelected: {
 			false: "translate-x-0",
 			true: "translate-x-[100%]",
@@ -37,21 +77,29 @@ const handle = tv({
 			true: "forced-colors:outline-[GrayText]",
 		},
 	},
+	defaultVariants: {
+		size: "md",
+	},
 });
 
-export function Switch({ children, ...props }: SwitchProps) {
+export function Switch({
+	children,
+	variant = "accent",
+	size = "md",
+	...props
+}: SwitchProps) {
 	return (
 		<AriaSwitch
 			{...props}
 			className={composeTailwindRenderProps(
 				props.className,
-				"group relative flex items-center gap-2 text-gray-800 text-sm transition disabled:text-gray-300 dark:text-zinc-200 dark:disabled:text-zinc-600 forced-colors:disabled:text-[GrayText]",
+				"group relative flex items-center gap-2 text-dark text-sm transition disabled:text-neutral forced-colors:disabled:text-[GrayText]",
 			)}
 		>
 			{(renderProps) => (
 				<>
-					<div className={track(renderProps)}>
-						<span className={handle(renderProps)} />
+					<div className={track({ ...renderProps, variant, size })}>
+						<span className={handle({ ...renderProps, size })} />
 					</div>
 					{children}
 				</>

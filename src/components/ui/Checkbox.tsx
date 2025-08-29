@@ -5,9 +5,9 @@ import {
 	Checkbox as AriaCheckbox,
 	CheckboxGroup as AriaCheckboxGroup,
 	type CheckboxGroupProps as AriaCheckboxGroupProps,
-	type CheckboxProps,
-	type ValidationResult,
+	type CheckboxProps as AriaCheckboxProps,
 	composeRenderProps,
+	type ValidationResult,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 import { Description, FieldError, Label } from "./Field";
@@ -19,6 +19,12 @@ export interface CheckboxGroupProps
 	children?: ReactNode;
 	description?: string;
 	errorMessage?: string | ((validation: ValidationResult) => string);
+}
+
+export interface CheckboxProps extends Omit<AriaCheckboxProps, "className"> {
+	/** @default 'accent' */
+	variant?: "accent" | "primary" | "destructive";
+	className?: string;
 }
 
 export function CheckboxGroup(props: CheckboxGroupProps) {
@@ -42,34 +48,59 @@ const checkboxStyles = tv({
 	base: "group relative flex items-center gap-2 text-sm transition",
 	variants: {
 		isDisabled: {
-			false: "text-gray-800 dark:text-zinc-200",
-			true: "text-gray-300 dark:text-zinc-600 forced-colors:text-[GrayText]",
+			false: "text-dark",
+			true: "text-neutral forced-colors:text-[GrayText]",
 		},
 	},
 });
 
 const boxStyles = tv({
 	extend: focusRing,
-	base: "flex h-5 w-5 shrink-0 items-center justify-center rounded-sm border-2 transition",
+	base: "flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 transition",
 	variants: {
+		variant: {
+			accent: "",
+			primary: "",
+			destructive: "",
+		},
 		isSelected: {
-			false:
-				"border-(--color) bg-white [--color:var(--color-gray-400)] dark:bg-zinc-900 group-pressed:[--color:var(--color-gray-500)] dark:[--color:var(--color-zinc-400)] dark:group-pressed:[--color:var(--color-zinc-300)]",
-			true: "border-(--color) bg-(--color) [--color:var(--color-gray-700)] group-pressed:[--color:var(--color-gray-800)] dark:[--color:var(--color-slate-300)] dark:group-pressed:[--color:var(--color-slate-200)] forced-colors:[--color:Highlight]!",
+			false: "border-neutral/30 bg-surface group-pressed:border-neutral/40",
+			true: "",
 		},
 		isInvalid: {
-			true: "[--color:var(--color-red-700)] group-pressed:[--color:var(--color-red-800)] dark:[--color:var(--color-red-600)] dark:group-pressed:[--color:var(--color-red-700)] forced-colors:[--color:Mark]!",
+			true: "border-error group-pressed:border-error/80 forced-colors:[--color:Mark]!",
 		},
 		isDisabled: {
-			true: "[--color:var(--color-gray-200)] dark:[--color:var(--color-zinc-700)] forced-colors:[--color:GrayText]!",
+			true: "border-neutral/20 bg-muted forced-colors:[--color:GrayText]!",
 		},
+	},
+	compoundVariants: [
+		{
+			variant: "accent",
+			isSelected: true,
+			className: "border-accent bg-accent group-pressed:opacity-90",
+		},
+		{
+			variant: "primary",
+			isSelected: true,
+			className: "border-primary bg-primary group-pressed:opacity-90",
+		},
+		{
+			variant: "destructive",
+			isSelected: true,
+			className: "border-error bg-error group-pressed:opacity-90",
+		},
+	],
+	defaultVariants: {
+		variant: "accent",
+		isSelected: false,
 	},
 });
 
 const iconStyles =
-	"w-4 h-4 text-white group-disabled:text-gray-400 dark:text-slate-900 dark:group-disabled:text-slate-600 forced-colors:text-[HighlightText]";
+	"w-4 h-4 text-white group-disabled:text-neutral forced-colors:text-[HighlightText]";
 
-export function Checkbox(props: CheckboxProps) {
+export function Checkbox({ variant = "accent", ...props }: CheckboxProps) {
 	return (
 		<AriaCheckbox
 			{...props}
@@ -81,6 +112,7 @@ export function Checkbox(props: CheckboxProps) {
 				<>
 					<div
 						className={boxStyles({
+							variant,
 							isSelected: isSelected || isIndeterminate,
 							...renderProps,
 						})}

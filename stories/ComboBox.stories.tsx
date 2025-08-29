@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 import { Form } from "react-aria-components";
 import { Button } from "../src/components/ui/Button";
 import {
@@ -64,7 +64,7 @@ Sections.args = {
 };
 
 export const Validation = (args: any) => (
-	<Form className="flex flex-col gap-2 items-start">
+	<Form className="flex flex-col items-start gap-2">
 		<Example {...args} />
 		<Button type="submit" variant="secondary">
 			Submit

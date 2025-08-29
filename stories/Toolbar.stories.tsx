@@ -6,7 +6,7 @@ import { Separator } from "../src/components/ui/Separator";
 import { ToggleButton } from "../src/components/ui/ToggleButton";
 import { Toolbar } from "../src/components/ui/Toolbar";
 
-import { Meta } from "@storybook/react-vite";
+import type { Meta } from "@storybook/react-vite";
 
 const meta: Meta<typeof Toolbar> = {
 	component: Toolbar,
@@ -22,13 +22,13 @@ export const Example = (args: any) => (
 	<Toolbar aria-label="Text formatting" {...args}>
 		<Group aria-label="Style" className="contents">
 			<ToggleButton aria-label="Bold" className="p-2.5">
-				<BoldIcon className="w-4 h-4" />
+				<BoldIcon className="h-4 w-4" />
 			</ToggleButton>
 			<ToggleButton aria-label="Italic" className="p-2.5">
-				<ItalicIcon className="w-4 h-4" />
+				<ItalicIcon className="h-4 w-4" />
 			</ToggleButton>
 			<ToggleButton aria-label="Underline" className="p-2.5">
-				<UnderlineIcon className="w-4 h-4" />
+				<UnderlineIcon className="h-4 w-4" />
 			</ToggleButton>
 		</Group>
 		<Separator
