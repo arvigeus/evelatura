@@ -26,6 +26,7 @@
 - [x] Set up Storybook
 - [x] Configure TailwindCSS 4 with custom theme (Be Vietnam Pro for body, Patrick Hand for headings)
 - [x] Add `.editorconfig` for consistent formatting
+- [x] Editor integration
 - [ ] Set up git hooks for pre-commit quality checks
 - [ ] Create base folder structure following feature-based organization
 
