@@ -110,7 +110,7 @@ export function RangeSlider({
 							</span>
 						)}
 
-						<div className="outline outline-accent outline-offset-2 forced-colors:outline-[Highlight] flex max-w-fit cursor-default items-center gap-1 rounded-full border px-3 py-0.5 text-xs transition outline-0 bg-accent/10 text-accent border-accent/20 hover:border-accent/40">
+						<div className="flex max-w-fit cursor-default items-center gap-1 rounded-full border border-accent/20 bg-accent/10 px-3 py-0.5 text-accent text-xs outline outline-0 outline-accent outline-offset-2 transition hover:border-accent/40 forced-colors:outline-[Highlight]">
 							{state.values[0] === state.values[1]
 								? formatValue(state.values[0])
 								: `${formatValue(state.values[0])} - ${formatValue(state.values[1])}`}

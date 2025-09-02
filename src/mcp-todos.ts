@@ -43,5 +43,7 @@ export function subscribeToTodos(callback: (todos: Todo[]) => void) {
 
 // Notify all subscribers of a user's cart
 function notifySubscribers() {
-	subscribers.forEach((cb) => cb(todos));
+	subscribers.forEach((cb) => {
+		cb(todos);
+	});
 }

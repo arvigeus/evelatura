@@ -25,7 +25,7 @@ export function Menu<T extends object>(props: MenuProps<T>) {
 		<Popover placement={props.placement} className="min-w-[150px]">
 			<AriaMenu
 				{...props}
-				className="max-h-[inherit] overflow-auto p-1 outline outline-0 [clip-path:inset(0_0_0_0_round_.75rem)]"
+				className="max-h-[inherit] overflow-auto p-1 outline-0 [clip-path:inset(0_0_0_0_round_.75rem)]"
 			/>
 		</Popover>
 	);
@@ -71,7 +71,7 @@ export function MenuSeparator(props: SeparatorProps) {
 
 export interface MenuSectionProps<T> extends AriaMenuSectionProps<T> {
 	title?: string;
-	items?: any;
+	items?: T[];
 }
 
 export function MenuSection<T extends object>(props: MenuSectionProps<T>) {

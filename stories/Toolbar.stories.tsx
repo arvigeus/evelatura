@@ -1,3 +1,4 @@
+import type { Meta } from "@storybook/react-vite";
 import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react";
 import { Group } from "react-aria-components";
 import { Button } from "../src/components/ui/Button";
@@ -5,8 +6,6 @@ import { Checkbox } from "../src/components/ui/Checkbox";
 import { Separator } from "../src/components/ui/Separator";
 import { ToggleButton } from "../src/components/ui/ToggleButton";
 import { Toolbar } from "../src/components/ui/Toolbar";
-
-import type { Meta } from "@storybook/react-vite";
 
 const meta: Meta<typeof Toolbar> = {
 	component: Toolbar,

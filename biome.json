@@ -9,6 +9,18 @@
 		"ignoreUnknown": false,
 		"includes": ["**", "!**/.tanstack", "!src/routeTree.gen.ts"]
 	},
+	"overrides": [
+		{
+			"includes": ["src/styles.css"],
+			"linter": {
+				"rules": {
+					"suspicious": {
+						"noUnknownAtRules": "off"
+					}
+				}
+			}
+		}
+	],
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "tab"

@@ -19,7 +19,21 @@ const meta: Meta<typeof Table> = {
 
 export default meta;
 
-const rows = [
+interface FileRow {
+	id: number;
+	name: string;
+	date: string;
+	type: string;
+}
+
+type SortableColumn = keyof Omit<FileRow, "id">;
+
+interface SortDescriptor {
+	column: SortableColumn;
+	direction: "ascending" | "descending";
+}
+
+const rows: FileRow[] = [
 	{ id: 1, name: "Games", date: "6/7/2020", type: "File folder" },
 	{ id: 2, name: "Program Files", date: "4/7/2021", type: "File folder" },
 	{ id: 3, name: "bootmgr", date: "11/20/2010", type: "System file" },
@@ -32,13 +46,12 @@ const rows = [
 ];
 
 export const Example = (args: any) => {
-	const [sortDescriptor, setSortDescriptor] = useState({
+	const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
 		column: "name",
 		direction: "ascending",
 	});
 
 	const items = useMemo(() => {
-		// @ts-expect-error
 		const items = rows
 			.slice()
 			.sort((a, b) =>

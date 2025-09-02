@@ -110,7 +110,7 @@ export function DropdownItem(props: ListBoxItemProps) {
 
 export interface DropdownSectionProps<T> extends SectionProps<T> {
 	title?: string;
-	items?: any;
+	items?: T[];
 }
 
 export function DropdownSection<T extends object>(

@@ -15,11 +15,12 @@ server.registerTool(
 		title: "Tool to add a todo to a list of todos",
 		description: "Add a todo to a list of todos",
 		inputSchema: {
+			// @ts-expect-error MCP SDK expects Zod schemas, but we're using ArkType for validation
 			title: type("string"),
 		},
 	},
 	({ title }) => ({
-		content: [{ type: "text", text: String(addTodo(title)) }],
+		content: [{ type: "text" as const, text: String(addTodo(title)) }],
 	}),
 );
 

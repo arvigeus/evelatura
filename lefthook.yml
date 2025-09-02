@@ -1,0 +1,9 @@
+# https://lefthook.dev/configuration/
+# bun lefthook run pre-commit
+pre-commit:
+  parallel: true
+  commands:
+    check:
+      run: bun check
+    typecheck:
+      run: bun typecheck

@@ -1,9 +1,9 @@
 import type { Meta } from "@storybook/react-vite";
 import {
 	Disclosure,
+	DisclosureGroup,
 	DisclosureHeader,
 	DisclosurePanel,
-	DisclosureGroup,
 } from "../src/components/ui/Disclosure";
 
 const meta: Meta<typeof DisclosureGroup> = {

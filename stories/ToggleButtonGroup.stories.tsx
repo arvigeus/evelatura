@@ -1,7 +1,7 @@
 import type { Meta } from "@storybook/react-vite";
+import { Bold, Italic, Underline } from "lucide-react";
 import { ToggleButton } from "../src/components/ui/ToggleButton";
 import { ToggleButtonGroup } from "../src/components/ui/ToggleButtonGroup";
-import { Bold, Italic, Underline } from "lucide-react";
 
 const meta: Meta<typeof ToggleButtonGroup> = {
 	component: ToggleButtonGroup,
