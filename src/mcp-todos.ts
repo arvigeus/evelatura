@@ -3,8 +3,8 @@ import fs from "node:fs";
 const todosPath = "./mcp-todos.json";
 
 // In-memory todos storage
-const todos = fs.existsSync(todosPath)
-	? JSON.parse(fs.readFileSync(todosPath, "utf8"))
+const todos: Todo[] = fs.existsSync(todosPath)
+	? (JSON.parse(fs.readFileSync(todosPath, "utf8")) as Todo[])
 	: [
 			{
 				id: 1,

@@ -22,7 +22,7 @@ export const ServerRoute = createServerFileRoute("/api/mcp-todos").methods({
 		});
 	},
 	POST: async ({ request }) => {
-		const { title } = await request.json();
+		const { title } = (await request.json()) as { title: string };
 		addTodo(title);
 		return Response.json(getTodos());
 	},
